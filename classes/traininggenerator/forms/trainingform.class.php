@@ -70,7 +70,7 @@
             $tmp_args_ar['class'] = 'form-control'; 
             $form_elements_ar[$tmp_args_ar['name']] = HTML::TextArea($tmp_args_ar);
             
-            //description
+            //submit
             $tmp_args_ar = array();
             $tmp_args_ar['type'] = 'submit';
             $tmp_args_ar['name'] = 'btn_submit'; 

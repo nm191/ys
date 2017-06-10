@@ -36,6 +36,9 @@ include($_SERVER['DOCUMENT_ROOT'].'/ys/classes/config.php');
                 <li class="nav-item">
                     <a class="nav-link" href="http://<?= PUBLIC_ROOT ?>traininggenerator">Training Generator</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://<?= PUBLIC_ROOT ?>students">Klimles Kids</a>
+                </li>
             </ul>
         </div>
     </nav>
