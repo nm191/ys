@@ -31,7 +31,7 @@
             }
 
             $return_ar[] = $label;
-            $return_ar[] = '<textarea '.implode(' ', $formatted_args_ar).'></textarea>';
+            $return_ar[] = '<textarea '.implode(' ', $formatted_args_ar).'>'.(!empty($args['value']) ? $args['value']: '').'</textarea>';
 
             return self::Div(implode('', $return_ar), '', 'form-group');
         }
@@ -48,7 +48,7 @@
             }
             $options_ar = array();
             foreach($args['options'] as $key => $value){
-                $options_ar[] = '<option value="'.$key.'">'.$value.'</option>';
+                $options_ar[] = '<option value="'.$key.'"'.($args['selected'] == $key ? 'selected' : '').   '>'.$value.'</option>';
             }
             unset($args['options']);
 
@@ -78,5 +78,65 @@
         static public function Div($content, $id = '', $class = ''){
             return '<div '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</div>';
         }
+
+        //TABLES
+        static public function Table($content, $id = '', $class = ''){
+            return '<table '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</table>';
+        }
+
+        static public function Thead($content, $id = '', $class = ''){
+            return '<thead '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</thead>';
+        }
+
+        static public function Tbody($content, $id = '', $class = ''){
+            return '<tbody '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</tbody>';
+        }
+
+        static public function Tr($content, $id = '', $class = ''){
+            return '<tr '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</tr>';
+        }
+
+        static public function Td($content, $id = '', $class = ''){
+            return '<td '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</td>';
+        }
+
+        static public function Th($content, $id = '', $class = ''){
+            return '<th '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</th>';
+        }
+
+        static public function A($content, $args, $id, $class){
+            $formatted_args_ar = array();
+            foreach($args as $key => $value){
+                $formatted_args_ar[] = $key.'="'.$value.'"';
+            }
+            $return_ar[] = '<a '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').' '.implode(' ', $formatted_args_ar).'>'.$content.'</a>';
+
+            return implode('', $return_ar);
+        }
+
+        static public function P($content, $id = '', $class = ''){
+            return '<p '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</p>';
+        }
+
+        static public function H1($content, $id = '', $class = ''){
+            return '<h1 '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</h1>';
+        }
+
+        static public function H2($content, $id = '', $class = ''){
+            return '<h2 '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</h2>';
+        }
+
+        static public function H3($content, $id = '', $class = ''){
+            return '<h3 '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</h3>';
+        }
+
+        static public function H4($content, $id = '', $class = ''){
+            return '<h4 '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</h4>';
+        }
+
+        static public function H5($content, $id = '', $class = ''){
+            return '<h5 '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</h5>';
+        }
+
     }
 ?>

@@ -1,23 +1,8 @@
 <?php
     class Students_Tabmenu{
         static public function get($current_page_name){
-
-            // <ul class="nav nav-tabs">
-            //     <li class="nav-item">
-            //         <a class="nav-link active" href="#">Active</a>
-            //     </li>
-            //     <li class="nav-item">
-            //         <a class="nav-link" href="#">Link</a>
-            //     </li>
-            //     <li class="nav-item">
-            //         <a class="nav-link" href="#">Link</a>
-            //     </li>
-            //     <li class="nav-item">
-            //         <a class="nav-link disabled" href="#">Disabled</a>
-            //     </li>
-            // </ul>
             $page_names_ar = self::getPageNames();
-
+            
             foreach($page_names_ar as $page_name => $title){
                 $tmp_tab_ar = array();
                 $tmp_tab_ar[] = '<li class="nav-item">';
@@ -36,6 +21,7 @@
         static private function getPageNames(){
             $page_names_ar['students_overview'] = 'Overzicht';
             $page_names_ar['add_student']      = 'Voeg leerling toe';
+            $page_names_ar['presence']      = 'Presententie';
 
             return $page_names_ar;
         }

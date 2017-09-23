@@ -1,7 +1,13 @@
 <?php
     class Students_Forms_StudentForm{
 
-        static public function get(){
+        static private $student = null;
+
+        static public function get(Students_Models_StudentModel &$student){
+            //init variables
+            self::$student = &$student;
+            // var_dump(self::$student);
+            $return_ar[] = HTML::Div('','','alert_container');
             $return_ar[] = self::getForm();
             $return_ar[] = self::getJquery();
 
@@ -33,6 +39,7 @@
             $tmp_args_ar['id'] = 'first_name'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->first_name : ''); 
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //last_name
@@ -43,6 +50,7 @@
             $tmp_args_ar['id'] = 'last_name'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->last_name : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //date_of_birth
@@ -53,6 +61,7 @@
             $tmp_args_ar['id'] = 'date_of_birth'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->date_of_birth : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //street_name
@@ -63,6 +72,7 @@
             $tmp_args_ar['id'] = 'street_name'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->street_name : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
              //house_number
@@ -73,6 +83,7 @@
             $tmp_args_ar['id'] = 'house_number'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->house_number : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
              //zipcode
@@ -83,6 +94,7 @@
             $tmp_args_ar['id'] = 'zipcode'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->zipcode : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
              //place
@@ -93,6 +105,29 @@
             $tmp_args_ar['id'] = 'place'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->place : '');
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
+
+             //group_id
+            $tmp_args_ar = array();
+            $tmp_args_ar['label'] = 'Groep:';  
+            $tmp_args_ar['name'] = 'group_id'; 
+            $tmp_args_ar['id'] = 'group_id'; 
+            $tmp_args_ar['class'] = 'form-control'; 
+            $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['selected'] = (self::$student->id ? self::$student->records_ar->group_id : '');
+            $tmp_args_ar['options'] = array(0 => 'Selecteer...') + DB_Students_Groups::getList();
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Select($tmp_args_ar);
+
+            //contest_group
+            $tmp_args_ar = array();
+            $tmp_args_ar['label'] = 'Wedstrijdgroep?';  
+            $tmp_args_ar['type'] = 'checkbox';  
+            $tmp_args_ar['name'] = 'contest_group'; 
+            $tmp_args_ar['id'] = 'contest_group'; 
+            $tmp_args_ar['class'] = 'form-control'; 
+            $tmp_args_ar['value'] = 1; 
+            // $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->contest_group : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //first_name_dad
@@ -103,6 +138,7 @@
             $tmp_args_ar['id'] = 'first_name_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->first_name_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //last_name_dad
@@ -113,6 +149,7 @@
             $tmp_args_ar['id'] = 'last_name_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->last_name_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //email_dad
@@ -123,6 +160,7 @@
             $tmp_args_ar['id'] = 'email_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->email_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //telephone_dad
@@ -133,6 +171,7 @@
             $tmp_args_ar['id'] = 'telephone_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->telephone_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //first_name_mom
@@ -143,6 +182,7 @@
             $tmp_args_ar['id'] = 'first_name_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->first_name_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //last_name_mom
@@ -153,6 +193,7 @@
             $tmp_args_ar['id'] = 'last_name_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->last_name_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //email_mom
@@ -163,6 +204,7 @@
             $tmp_args_ar['id'] = 'email_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->email_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //telephone_mom
@@ -173,6 +215,7 @@
             $tmp_args_ar['id'] = 'telephone_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->telephone_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //allergies
@@ -181,6 +224,7 @@
             $tmp_args_ar['name'] = 'allergies'; 
             $tmp_args_ar['id'] = 'allergies'; 
             $tmp_args_ar['class'] = 'form-control'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->allergies : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::TextArea($tmp_args_ar);
 
             //medicine
@@ -189,7 +233,17 @@
             $tmp_args_ar['name'] = 'medicine'; 
             $tmp_args_ar['id'] = 'medicine'; 
             $tmp_args_ar['class'] = 'form-control'; 
+            $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->medicine : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::TextArea($tmp_args_ar);
+
+             //student_id
+             $tmp_args_ar = array();
+             $tmp_args_ar['type'] = 'hidden';   
+             $tmp_args_ar['name'] = 'student_id'; 
+             $tmp_args_ar['id'] = 'student_id'; 
+             $tmp_args_ar['class'] = 'form-control'; 
+             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->id : 0);
+             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             return $form_elements_ar;
         }
@@ -202,7 +256,9 @@
                 'street_name',
                 'house_number',
                 'zipcode',
-                'place'
+                'place',
+                'group_id',
+                'contest_group'
             );
 
             $fieldset_ar['Ouders/Verzorgers'] = array(
@@ -218,7 +274,8 @@
 
             $fieldset_ar['Bijzonderheden'] = array(
                 'allergies',
-                'medicine'
+                'medicine',
+                'student_id'
             );
             $form_elements_ar = self::getFormElements();
 
@@ -244,7 +301,18 @@
                     var form = $('#new_student_form');
                     form.on('submit', function(e){
                         e.preventDefault();
-                        console.log('submitted');
+                        var data  = $(this).serializeArray();
+
+                        $.ajax({
+                            url: '<?= "http://".PUBLIC_ROOT."students/?page=ajax_handle_form_post" ?>',
+                            type: 'POST',
+                            data : data
+                        }).done(function(result){
+                            var container = $('.alert_container'); 
+                                container.html(result);
+                                container.show();
+                                $('html, body').animate({ scrollTop: 0 }, 'fast');
+                        });
                     });
                 });
             </script>
