@@ -30,3 +30,11 @@ input[type="checkbox"]{
 .dataTables_length label, .dataTables_filter label{
     display: flex;
 }
+
+#students_overview_table_wrapper{
+    margin-top: 20px;
+}
+
+.logged_in_as{
+    margin-right: 10px;
+}

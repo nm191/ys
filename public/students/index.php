@@ -38,6 +38,12 @@
             }
             die(DB_Students_StudentPresence::setPresenceValue($_POST['student_id']));
             break;
+        case 'ajax_set_student_field_value':
+            if(empty($_POST)){
+                die(0);
+            }
+            die(DB_Students_Students::update($_POST['student_id'], array($_POST['field_name'] => $_POST['field_value'])));
+            break;
         case 'ajax_handle_form_post':
             if(empty($_POST)){
                 die(Bootstrap::Alert('Error: geen data meegegeven', 'danger'));

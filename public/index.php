@@ -1,6 +1,8 @@
 <?php
   session_start();
   include($_SERVER['DOCUMENT_ROOT'].'/ys/classes/config.php');
+  Protect::mustNotBeLoggedIn();
+//   dd::show($_POST);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,17 +45,17 @@
                 </div>
                 <div class="card-body">
                     <p class='login'>
-                        <form>
+                        <form class='login_form' method='POST'>
                             <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                            <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                <input type="email" class="form-control" id="inputEmail" name='email' placeholder="Email">
                             </div>
                             </div>
                             <div class="form-group row">
-                            <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                            <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                <input type="password" class="form-control" id="inputPassword" name='password' placeholder="Password">
                             </div>
                             </div>
                             <div class="form-group row">
@@ -72,5 +74,29 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.login_form').on('submit',function(e){
+            e.preventDefault();
+            var form_data = $(this).serializeArray();
+            $.ajax({
+                method: 'POST',
+                url: 'handlers/loginHandler.php',
+                data: form_data
+            }).done(function(result){
+                console.log(result);
+                $('.login_form .alert ').remove();
+                if(!result){
+                    $('.login_form').prepend('<?= Bootstrap::Alert("Er ging helaas iets mis. Probeer het nog eens.", "danger")?>');
+                }else{
+                    $('.login_form').prepend('<?= Bootstrap::Alert("Je bent succesvol ingelogd. Je wordt binnen enkele seconden doorgestuurd.", "success")?>');
+                    window.setTimeout(function(){
+                        location.reload();
+                    }, 2000);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

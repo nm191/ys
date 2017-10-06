@@ -1,14 +1,15 @@
 <?php
-    class DB_Students_Students{
+    class DB_Users_Users{
 
         static public function insert(array $field_values_ar){
             if(empty($field_values_ar)){
                 return false;
             }
-            unset($field_values_ar['student_id']);
+            $field_values_ar['password'] = password_hash($field_values_ar['password'], PASSWORD_DEFAULT);
             $field_values_ar['date_created'] = date('Y-m-d');
+            unset($field_values_ar['user_id']);
 
-            $sql_ar[] = 'INSERT INTO '.DB_Students_TbNames::STUDENTS;
+            $sql_ar[] = 'INSERT INTO '.DB_Users_TbNames::USERS;
             $sql_ar[] = '('.implode(', ', array_keys($field_values_ar)).')';
             $sql_ar[] = 'VALUES';
             $sql_ar[] = '(:'.implode(', :', array_keys($field_values_ar)).')';
@@ -24,8 +25,10 @@
             if(empty($field_values_ar) || !$id){
                 return false;
             }
-            unset($field_values_ar['student_id']);
-            $sql_ar[] = 'UPDATE '.DB_Students_TbNames::STUDENTS;
+            unset($field_values_ar['user_id']);
+            $field_values_ar['password'] = password_hash($field_values_ar['password'], PASSWORD_DEFAULT);
+
+            $sql_ar[] = 'UPDATE '.DB_Users_TbNames::USERS;
             $sql_ar[] = 'SET';
              //build pdo parameters ar
             foreach($field_values_ar as $key => $value){
@@ -41,12 +44,12 @@
         }
 
         static public function delete($id){
-            return self::update($id, array('is_active' => 0));
+            return self::update($id, array('deleted_by_user_id' => $_SESSION['user']->id, 'date_deleted' => date('Y-m-d H:i:s')));
         }
 
         static public function store(array $field_values_ar){
-            if(isset($field_values_ar['student_id']) && $field_values_ar['student_id'] > 0){
-                return self::update($field_values_ar['student_id'], $field_values_ar);
+            if(isset($field_values_ar['user_id']) && $field_values_ar['user_id'] > 0){
+                return self::update($field_values_ar['user_id'], $field_values_ar);
             }
             return self::insert($field_values_ar);
         }
@@ -62,39 +65,23 @@
                 $filter_ar['is_active'] = 1;
             }
             //build select ar
-            $select_ar[] = 'stdnts.id';
-            $select_ar[] = 'stdnts.first_name';
-            $select_ar[] = 'stdnts.last_name';
-            $select_ar[] = 'stdnts.date_of_birth';
-            $select_ar[] = 'stdnts.street_name';
-            $select_ar[] = 'stdnts.house_number';
-            $select_ar[] = 'stdnts.zipcode';
-            $select_ar[] = 'stdnts.place';
-            $select_ar[] = 'stdnts.first_name_dad';
-            $select_ar[] = 'stdnts.last_name_dad';
-            $select_ar[] = 'stdnts.email_dad';
-            $select_ar[] = 'stdnts.telephone_dad';
-            $select_ar[] = 'stdnts.first_name_mom';
-            $select_ar[] = 'stdnts.last_name_mom';
-            $select_ar[] = 'stdnts.email_mom';
-            $select_ar[] = 'stdnts.telephone_mom';
-            $select_ar[] = 'stdnts.allergies';
-            $select_ar[] = 'stdnts.medicine';
-            $select_ar[] = 'stdnts.contest_group';
-            $select_ar[] = 'stdnts.group_id';
-            $select_ar[] = 'stdnts.climbing_level';
-            $select_ar[] = 'grps.description as group_name';
-            $select_ar[] = 'prsnc.id as present';
+            $select_ar[] = 'srs.id';
+            $select_ar[] = 'srs.date_created';
+            $select_ar[] = 'srs.date_last_modified';
+            $select_ar[] = 'srs.date_deleted';
+            $select_ar[] = 'srs.email';
+            $select_ar[] = 'srs.password';
+            $select_ar[] = 'srs.name';
+            $select_ar[] = 'srs.short_name';
+            // $select_ar[] = 'srs.first_time_login';
+           
 
             //build sql ar
             $sql_ar[] = 'SELECT '.implode(', ', $select_ar);
-            $sql_ar[] = 'FROM '.DB_Students_TbNames::STUDENTS.' stdnts';
-            $sql_ar[] = 'LEFT JOIN '.DB_Students_TbNames::GROUPS.' grps';
-            $sql_ar[] = 'ON stdnts.group_id = grps.id';
-            $sql_ar[] = 'LEFT JOIN '.DB_Students_TbNames::PRESENCE.' prsnc';
-            $sql_ar[] = 'ON stdnts.id = prsnc.student_id AND prsnc.presence_date = CURRENT_DATE';
+            $sql_ar[] = 'FROM '.DB_Users_TbNames::USERS.' srs';
+            $sql_ar[] = 'WHERE srs.deleted_by_user_id = 0';
             $where_sql_ar = self::getWhereSQL($filter_ar);
-            if (!empty($where_sql_ar['sql'])) { $sql_ar[] = 'WHERE '.implode(' AND ', $where_sql_ar['sql']); }
+            if (!empty($where_sql_ar['sql'])) { $sql_ar[] = 'AND '.implode(' AND ', $where_sql_ar['sql']); }
              // Get query result
             return DB::fetchAll(implode(' ', $sql_ar), $where_sql_ar['params']);
         }   
@@ -132,11 +119,14 @@
                     }
                 }
                 // set db table abbreviation
-                $db_table_abbr = 'stdnts';
+                $db_table_abbr = 'srs';
                 // set SQL, based on field name
                 switch ($filter_field) {
                     case 'id':
-                    case 'is_active':
+                    case 'email':
+                    case 'name':
+                    case 'shortname':
+                    case 'password':
                         if($filter_field == 'call_id'){ $filter_field = 'id'; }
                         if (is_array($filter_value)) {
                             $tmp_filter_select_ar = array();

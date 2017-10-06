@@ -1,4 +1,8 @@
-
+<?php
+    Protect::mustBeLoggedIn();
+    //get current page name
+    $url_ar = explode('/', $_SERVER['PHP_SELF']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,15 +43,29 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-md-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="http://<?= PUBLIC_ROOT ?>">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link <?= (in_array('home.php', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://<?= PUBLIC_ROOT ?>traininggenerator">Training Generator</a>
+                    <a class="nav-link <?= (in_array('traininggenerator', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>traininggenerator">Training Generator</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="http://<?= PUBLIC_ROOT ?>students">Klimles Kids</a>
+                    <a class="nav-link <?= (in_array('students', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>students">Klimles Kids</a>
                 </li>
+                <?php if($_SESSION['user']->id == 1){?>
+                <li class="nav-item dropdown">
+                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle nav-link <?= (in_array('admin', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>admin">Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="http://<?= PUBLIC_ROOT ?>admin/users">Gebruikers</a>
+                        <a class="dropdown-item" href="#">Groepen</a>
+                        <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+                    </div>
+                </li>
+                <?php } ?>
             </ul>
+            <span class="navbar-text logged_in_as">
+                Ingelogd als <?= $_SESSION['user']->name ?>
+            </span>
+            <a href='http://<?=PUBLIC_ROOT?>logout.php' class='btn btn-danger'>Log Uit</a>
         </div>
     </nav>
     <div class="container-fluid">
