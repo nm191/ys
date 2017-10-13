@@ -90,7 +90,7 @@
                 $arg_ar = [];
                 $args_ar['type'] = 'text';
                 $args_ar['class'] = 'climbing_level_input';
-                $args_ar['size'] = '1';
+                $args_ar['size'] = '3';
                 $args_ar['maxlength'] = '10';
                 if($record->climbing_level != null){
                     $args_ar['value'] = $record->climbing_level;

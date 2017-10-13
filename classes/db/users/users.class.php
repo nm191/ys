@@ -5,6 +5,7 @@
             if(empty($field_values_ar)){
                 return false;
             }
+            $unhashed_password = $field_values_ar['password'];
             $field_values_ar['password'] = password_hash($field_values_ar['password'], PASSWORD_DEFAULT);
             $field_values_ar['date_created'] = date('Y-m-d');
             unset($field_values_ar['user_id']);
@@ -18,7 +19,14 @@
             foreach($field_values_ar as $key => $value){
                 $pdo_parameters_ar[':'.$key] = $value;
             }
-            return DB::executeInsertQuery(implode(' ', $sql_ar), $pdo_parameters_ar);
+
+            //send mail
+            $new_user_id = DB::executeInsertQuery(implode(' ', $sql_ar), $pdo_parameters_ar);
+            $user = new Admin_Users_Models_UserModel($new_user_id);
+
+            $mail_result = Mail::sendNewAccountMail($user, $unhashed_password);
+
+            return $new_user_id;
         }
 
         static public function update($id, array $field_values_ar){

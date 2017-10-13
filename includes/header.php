@@ -48,9 +48,9 @@
                 <li class="nav-item">
                     <a class="nav-link <?= (in_array('home.php', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link <?= (in_array('traininggenerator', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>traininggenerator">Training Generator</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link <?= (in_array('students', $url_ar) ? 'active' : '')?>" href="http://<?= PUBLIC_ROOT ?>students">Klimles Kids</a>
                 </li>

@@ -104,7 +104,7 @@
             return '<th '.($id ? 'id="'.$id.'" ' : '').($class ? 'class="'.$class.'"' : '').'>'.$content.'</th>';
         }
 
-        static public function A($content, $args, $id, $class){
+        static public function A($content, $args, $id = '', $class = ''){
             $formatted_args_ar = array();
             foreach($args as $key => $value){
                 $formatted_args_ar[] = $key.'="'.$value.'"';

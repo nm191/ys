@@ -10,7 +10,7 @@
         }
 
         static private function getConfirmationDialog(){
-            return HTML::Div(HTML::P('Weet je zeker dat je deze leerling wilt verwijderen?'), 'dialog-confirm');
+            return HTML::Div(HTML::P('Weet je zeker dat je deze gebruiker wilt verwijderen?'), 'dialog-confirm');
         }
 
         static private function getTable(){

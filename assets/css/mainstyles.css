@@ -74,3 +74,11 @@ td.table-danger{
     align-items: center;
 }
 
+@media (max-width: 991px){
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+}

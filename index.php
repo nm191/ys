@@ -37,7 +37,7 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-6 ml-auto mr-auto text-center">
+        <div class="col-md-6 ml-auto mr-auto col-sm-12 text-center">
             <h1>Yellow-stone</h1>
             <div class="card">
                 <div class="card-header">
