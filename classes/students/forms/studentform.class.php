@@ -6,6 +6,7 @@
         static public function get(Students_Models_StudentModel &$student){
             //init variables
             self::$student = &$student;
+
             // var_dump(self::$student);
             $return_ar[] = HTML::Div('','','alert_container');
             $return_ar[] = self::getForm();
@@ -127,7 +128,24 @@
             $tmp_args_ar['id'] = 'contest_group'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['value'] = 1; 
-            // $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->contest_group : '');
+            if(self::$student->id && self::$student->records_ar->contest_group == 1){
+                $tmp_args_ar['checked'] = true;
+            }
+            // $tmp_args_ar['checked'] = (self::$student->id && self::$student->records_ar->contest_group == 1 ? self::$student->records_ar->contest_group : false);
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
+
+            //contest_group
+            $tmp_args_ar = array();
+            $tmp_args_ar['label'] = 'Huur Materiaal?';  
+            $tmp_args_ar['type'] = 'checkbox';  
+            $tmp_args_ar['name'] = 'has_rental_equipment'; 
+            $tmp_args_ar['id'] = 'has_rental_equipment'; 
+            $tmp_args_ar['class'] = 'form-control'; 
+            $tmp_args_ar['value'] = 1; 
+            if(self::$student->id && self::$student->records_ar->has_rental_equipment == 1){
+                $tmp_args_ar['checked'] = true;
+            }
+            // $tmp_args_ar['checked'] = (self::$student->id && self::$student->records_ar->has_rental_equipment == 1 ? self::$student->records_ar->has_rental_equipment :  false);
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
             //first_name_dad
@@ -258,7 +276,8 @@
                 'zipcode',
                 'place',
                 'group_id',
-                'contest_group'
+                'contest_group',
+                'has_rental_equipment'
             );
 
             $fieldset_ar['Ouders/Verzorgers'] = array(
@@ -302,6 +321,12 @@
                     form.on('submit', function(e){
                         e.preventDefault();
                         var data  = $(this).serializeArray();
+
+                        var serialized = $('input:checkbox').map(function() {
+                            return { name: this.name, value: this.checked ? this.value : 0 };
+                            });
+
+                        var data = $.merge(data, serialized);
 
                         $.ajax({
                             url: '<?= "http://".PUBLIC_ROOT."students/?page=ajax_handle_form_post" ?>',

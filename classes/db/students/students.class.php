@@ -83,6 +83,7 @@
             $select_ar[] = 'stdnts.contest_group';
             $select_ar[] = 'stdnts.group_id';
             $select_ar[] = 'stdnts.climbing_level';
+            $select_ar[] = 'stdnts.has_rental_equipment';
             $select_ar[] = 'grps.description as group_name';
             $select_ar[] = 'prsnc.id as present';
 
@@ -137,6 +138,7 @@
                 switch ($filter_field) {
                     case 'id':
                     case 'is_active':
+                    case 'group_id':
                         if($filter_field == 'call_id'){ $filter_field = 'id'; }
                         if (is_array($filter_value)) {
                             $tmp_filter_select_ar = array();

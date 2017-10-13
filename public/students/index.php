@@ -5,6 +5,7 @@
     //get current page name / set default page name
     if(isset($_GET['page'])){
         $current_page_name = $_GET['page'];
+        unset($_GET['page']);
     }else{
         $current_page_name = 'students_overview';
     }
@@ -19,7 +20,11 @@
             $models_ar[$param_name] = new $model_name(0);
         }
     }
-
+    
+    $filter_ar = [];
+    foreach($_GET as $field_name => $field_value){
+        $filter_ar[$field_name] = $field_value;
+    }
     
     $show_tabmenu = true;
     switch($current_page_name){
@@ -30,7 +35,7 @@
             $page_content_ar[] = Students_Forms_StudentForm::get($models_ar['student']);
             break;
         case 'presence':
-            $page_content_ar[] = Students_Tables_StudentPresenceTable::get();
+            $page_content_ar[] = Students_Tables_StudentPresenceTable::get($filter_ar);
             break;
         case 'ajax_set_student_presence_value':
             if(empty($_POST)){

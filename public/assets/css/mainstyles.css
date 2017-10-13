@@ -38,3 +38,39 @@ input[type="checkbox"]{
 .logged_in_as{
     margin-right: 10px;
 }
+
+td.table-success{
+    background-color: #c3e6cb !important;
+}
+
+td.table-danger{
+    background-color: #f1b0b7 !important;
+}
+
+.filter_container .form-group select{
+    display: inline;
+    width: auto !important;
+    height: auto !important;
+    margin-left: 5px;
+    padding: 0;
+}
+
+.filter_container .form-group{
+    display: inline;
+}
+
+.filter_container .form-group, .filter_container label{
+    margin-bottom: 0;
+}
+
+.filter_container{
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.filter_container form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+

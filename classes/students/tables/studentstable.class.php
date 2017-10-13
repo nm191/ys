@@ -25,6 +25,7 @@
             $th_ar[] = HTML::Th('Achternaam');
             $th_ar[] = HTML::Th('Groep');
             $th_ar[] = HTML::Th('Wedstrijdgroep?');
+            $th_ar[] = HTML::Th('Huur Materiaal?');
             $th_ar[] = HTML::Th('Opties');
             $tr = HTML::Tr(implode('', $th_ar));
             return HTML::Thead($tr);
@@ -47,6 +48,7 @@
                 $tmp_td_ar[] = HTML::Td($record->last_name);
                 $tmp_td_ar[] = HTML::Td($record->group_name);
                 $tmp_td_ar[] = HTML::Td(($record->contest_group ? 'Ja' : 'Nee'));
+                $tmp_td_ar[] = HTML::Td(($record->has_rental_equipment ? FontAwesome::Icon('check', 2) : FontAwesome::Icon('remove', 2)));
                 $tmp_td_ar[] = HTML::Td(HTML::Div(implode('', $options_ar),'', 'btn-group'));
                 $tr_ar[] = HTML::Tr(implode('', $tmp_td_ar));
             }

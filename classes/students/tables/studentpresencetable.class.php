@@ -1,12 +1,56 @@
 <?php
     class Students_Tables_StudentPresenceTable{
+        static $filter_ar = array();
 
-        static public function get(){
+        static public function get($filter_ar = array()){
+            //init variables
+            self::$filter_ar = $filter_ar;
+
+            //check filter
+            if(isset(self::$filter_ar['group_id']) && self::$filter_ar['group_id'] == 0){
+                unset(self::$filter_ar['group_id']);
+            }
 
             $return_ar[] = HTML::P('Presentie van de klimles op <strong>'.date('d-m-Y').'</strong>', '', 'text-center lead present_date_container');
+            $return_ar[] = self::getFiltersContainer();
             $return_ar[] = self::getTable();
             $return_ar[] = self::getJquery();
             return implode('', $return_ar);
+        }
+
+        static private function getFiltersContainer(){
+            //build filter content
+            //group_id
+            $tmp_args_ar = array();
+            $tmp_args_ar['label'] = 'Groep:';  
+            $tmp_args_ar['name'] = 'group_id'; 
+            $tmp_args_ar['id'] = 'group_id'; 
+            $tmp_args_ar['class'] = 'form-control'; 
+            $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['selected'] = (isset(self::$filter_ar['group_id']) ? self::$filter_ar['group_id'] : 0);
+            $tmp_args_ar['options'] = array(0 => 'Alle') + DB_Students_Groups::getList();
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Select($tmp_args_ar);
+
+            //hidden page name
+            $tmp_args_ar = array();
+            $tmp_args_ar['type'] = 'hidden';
+            $tmp_args_ar['name'] = 'page'; 
+            $tmp_args_ar['id'] = 'page'; 
+            $tmp_args_ar['value'] = 'presence'; 
+            $form_elements_ar[$tmp_args_ar['name']] =  HTML::Input($tmp_args_ar);
+
+            //filter submit button
+            $tmp_args_ar = array();
+            $tmp_args_ar['type'] = 'submit';
+            $tmp_args_ar['name'] = 'btn_submit'; 
+            $tmp_args_ar['id'] = 'btn_submit'; 
+            $tmp_args_ar['class'] = 'btn btn-success'; 
+            $tmp_args_ar['value'] = 'Toepassen'; 
+            $form_elements_ar[$tmp_args_ar['name']] =  HTML::Input($tmp_args_ar);
+
+            $form = HTML::Form(implode('', $form_elements_ar), 'students_presence_filter', '');
+
+            return HTML::Div($form, '', 'bg-primary text-white filter_container');
         }
         
         static private function getTable(){
@@ -20,6 +64,7 @@
             $th_ar[] = HTML::Th('Naam');
             $th_ar[] = HTML::Th('Groep');
             $th_ar[] = HTML::Th('Klimniveau');
+            $th_ar[] = HTML::Th('Huur Materiaal?');
             $th_ar[] = HTML::Th('Aanwezig?');
             $tr = HTML::Tr(implode('', $th_ar));
             return HTML::Thead($tr);
@@ -27,7 +72,8 @@
 
         static private function getTableData(){
             //get all students
-            $records_ar = DB_Students_Students::getFullRecords();
+            $records_ar = DB_Students_Students::getFullRecords(self::$filter_ar);
+            // dd::show($records_ar);
             $tr_ar = array();
             foreach($records_ar as $record){
                 $args_ar = $tmp_td_ar = array();
@@ -57,6 +103,7 @@
                 $tmp_td_ar[] = HTML::Td($record->first_name.' '.$record->last_name);
                 $tmp_td_ar[] = HTML::Td($record->group_name);
                 $tmp_td_ar[] = HTML::Td($climbing_level);
+                $tmp_td_ar[] = HTML::Td(($record->has_rental_equipment ? FontAwesome::Icon('check', 2) : FontAwesome::Icon('remove', 2)), '', ($record->has_rental_equipment ? 'table-success' : 'table-danger'));
                 $tmp_td_ar[] = HTML::Td($checkbox);
                 $tr_ar[] = HTML::Tr(implode('', $tmp_td_ar), '', ($record->present ? 'table-success' : ''));
             }
@@ -121,6 +168,12 @@
                         }
                         // $('.result_container').html(result);
                     });
+                });
+
+                $('#students_presence_filter').on('submit', function(e){
+                    e.preventDefault();
+                    var filter = $(this).serialize();
+                    window.location.href = '?'+filter;
                 });
 
             });
