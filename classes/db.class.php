@@ -4,11 +4,11 @@
          static private function getConnection(){
             // make db connection
             $servername = "localhost";
-            $username = "root";
-            $password = "";
+            $username = "silkmedi_nick";
+            $password = "Renoob2312";
             
             try {
-                $conn = new PDO("mysql:host=$servername;dbname=yellowstone", $username, $password);
+                $conn = new PDO("mysql:host=$servername;dbname=silkmedi_ys", $username, $password);
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 return $conn;
