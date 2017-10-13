@@ -66,7 +66,7 @@
                 <?php } ?>
             </ul>
             <span class="navbar-text logged_in_as">
-                Ingelogd als <?= $_SESSION['user']->name ?>
+                Ingelogd als <a href='http://<?= PUBLIC_ROOT ?>profile/?user_id=<?=$_SESSION['user']->id?>'><?= $_SESSION['user']->name ?></a>
             </span>
             <a href='http://<?=PUBLIC_ROOT?>logout.php' class='btn btn-danger'>Log Uit</a>
         </div>

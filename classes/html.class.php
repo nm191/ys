@@ -41,6 +41,10 @@
                 return false;
             }
 
+            if(!isset($args['empty_first_value'])){
+                $args['empty_first_value'] = false;
+            }
+
             $label = '';
             if(isset($args['label'])){
                 $label = '<label for="'.$args['id'].'">'.$args['label'].'</label>';
@@ -48,7 +52,12 @@
             }
             $options_ar = array();
             foreach($args['options'] as $key => $value){
-                $options_ar[] = '<option value="'.$key.'"'.($args['selected'] == $key ? 'selected' : '').   '>'.$value.'</option>';
+                if($args['empty_first_value'] && $key == 0){
+                    $options_ar[] = '<option value=""'.($args['selected'] == $key ? 'selected' : '').   '>'.$value.'</option>';
+                }else{
+                    $options_ar[] = '<option value="'.$key.'"'.($args['selected'] == $key ? 'selected' : '').   '>'.$value.'</option>';
+                }
+                
             }
             unset($args['options']);
 

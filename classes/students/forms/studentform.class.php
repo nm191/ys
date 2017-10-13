@@ -61,7 +61,7 @@
             $tmp_args_ar['name'] = 'date_of_birth'; 
             $tmp_args_ar['id'] = 'date_of_birth'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->date_of_birth : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -72,7 +72,7 @@
             $tmp_args_ar['name'] = 'street_name'; 
             $tmp_args_ar['id'] = 'street_name'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->street_name : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -83,7 +83,7 @@
             $tmp_args_ar['name'] = 'house_number'; 
             $tmp_args_ar['id'] = 'house_number'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->house_number : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -94,7 +94,7 @@
             $tmp_args_ar['name'] = 'zipcode'; 
             $tmp_args_ar['id'] = 'zipcode'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->zipcode : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -105,7 +105,7 @@
             $tmp_args_ar['name'] = 'place'; 
             $tmp_args_ar['id'] = 'place'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->place : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -116,6 +116,7 @@
             $tmp_args_ar['id'] = 'group_id'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
+            $tmp_args_ar['empty_first_value'] = true; 
             $tmp_args_ar['selected'] = (self::$student->id ? self::$student->records_ar->group_id : '');
             $tmp_args_ar['options'] = array(0 => 'Selecteer...') + DB_Students_Groups::getList();
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Select($tmp_args_ar);
@@ -155,7 +156,7 @@
             $tmp_args_ar['name'] = 'first_name_dad'; 
             $tmp_args_ar['id'] = 'first_name_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->first_name_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -166,7 +167,7 @@
             $tmp_args_ar['name'] = 'last_name_dad'; 
             $tmp_args_ar['id'] = 'last_name_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->last_name_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -177,7 +178,7 @@
             $tmp_args_ar['name'] = 'email_dad'; 
             $tmp_args_ar['id'] = 'email_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->email_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -188,7 +189,7 @@
             $tmp_args_ar['name'] = 'telephone_dad'; 
             $tmp_args_ar['id'] = 'telephone_dad'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->telephone_dad : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -199,7 +200,7 @@
             $tmp_args_ar['name'] = 'first_name_mom'; 
             $tmp_args_ar['id'] = 'first_name_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->first_name_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -210,7 +211,7 @@
             $tmp_args_ar['name'] = 'last_name_mom'; 
             $tmp_args_ar['id'] = 'last_name_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->last_name_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -221,7 +222,7 @@
             $tmp_args_ar['name'] = 'email_mom'; 
             $tmp_args_ar['id'] = 'email_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->email_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
@@ -232,7 +233,7 @@
             $tmp_args_ar['name'] = 'telephone_mom'; 
             $tmp_args_ar['id'] = 'telephone_mom'; 
             $tmp_args_ar['class'] = 'form-control'; 
-            $tmp_args_ar['required'] = 'true'; 
+            // $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$student->id ? self::$student->records_ar->telephone_mom : '');
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
 
