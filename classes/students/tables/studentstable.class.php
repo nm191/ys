@@ -60,48 +60,46 @@
             ?>
             <script>
             $(document).ready(function(){
-                 $('#students_overview_table').DataTable({
-                     "initComplete" : function(){
-                            var delete_button = $('.btn_delete');
-                                delete_button.on('click', function(e){
-                                    e.preventDefault();
-                                    var id = $(this).data('id');
-                                        table_row = $(this).parents('tr');
-                                    $("#dialog-confirm").dialog({
-                                        title: "Leerling verwijderen",
-                                        resizable: false,
-                                        height: "auto",
-                                        width: 400,
-                                        modal: true,
-                                        buttons: {
-                                            "Verwijder": function(){
-                                                deleteStudent();
-                                                $(this).dialog("close");
-                                            },
-                                            "Annuleren" : function(){
-                                                $(this).dialog("close");
-                                            }
-                                        }
+                $('#students_overview_table').DataTable({
+                    "lengthMenu": [ [-1, 25, 50, 100], ["All", 25, 50, 100] ]
+                });
+                var delete_button = $('.btn_delete');
+                $('#students_overview_table').on('click', '.btn_delete', function(e){
+                    e.preventDefault();
+                    var id = $(this).data('id');
+                        table_row = $(this).parents('tr');
+                    $("#dialog-confirm").dialog({
+                        title: "Leerling verwijderen",
+                        resizable: false,
+                        height: "auto",
+                        width: 400,
+                        modal: true,
+                        buttons: {
+                            "Verwijder": function(){
+                                deleteStudent();
+                                $(this).dialog("close");
+                            },
+                            "Annuleren" : function(){
+                                $(this).dialog("close");
+                            }
+                        }
 
-                                    });
+                    });
 
-                                    function deleteStudent(){
-                                        $.ajax({
-                                            url: '<?= "http://".PUBLIC_ROOT."students/?page=ajax_delete_student" ?>',
-                                            method: 'GET',
-                                            data: {student_id : id}
-                                        }).done(function(data){
-                                            if(data){
-                                                table_row.hide('highlight', function(){table_row.remove();});
-                                            }else{
-                                                console.log('error');
-                                            }
-                                        });
-                                    }
-                                });
-                     }
-                 });
-
+                    function deleteStudent(){
+                        $.ajax({
+                            url: '<?= "http://".PUBLIC_ROOT."students/?page=ajax_delete_student" ?>',
+                            method: 'GET',
+                            data: {student_id : id}
+                        }).done(function(data){
+                            if(data){
+                                table_row.hide('highlight', function(){table_row.remove();});
+                            }else{
+                                console.log('error');
+                            }
+                        });
+                    }
+                });
 
             });
             </script>

@@ -37,6 +37,9 @@
         case 'presence':
             $page_content_ar[] = Students_Tables_StudentPresenceTable::get($filter_ar);
             break;
+        case 'presence_history':
+            $page_content_ar[] = Students_Tables_StudentPresenceHistoryTable::get($filter_ar);
+            break;
         case 'ajax_set_student_presence_value':
             if(empty($_POST)){
                 die(0);

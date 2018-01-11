@@ -9,6 +9,8 @@
             //check filter
             if(isset(self::$filter_ar['group_id']) && self::$filter_ar['group_id'] == 0){
                 unset(self::$filter_ar['group_id']);
+            }elseif(isset(self::$filter_ar['group_id']) && self::$filter_ar['group_id'] == 420){
+                self::$filter_ar['contest_group'] = 1;
             }
 
             $return_ar[] = HTML::P('Presentie van de klimles op <strong>'.date('d-m-Y').'</strong>', '', 'text-center lead present_date_container');
@@ -28,7 +30,7 @@
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['selected'] = (isset(self::$filter_ar['group_id']) ? self::$filter_ar['group_id'] : 0);
-            $tmp_args_ar['options'] = array(0 => 'Alle') + DB_Students_Groups::getList();
+            $tmp_args_ar['options'] = array(0 => 'Alle', 420 => 'Wedstrijd groep') + DB_Students_Groups::getList();
             $form_elements_ar[$tmp_args_ar['name']] = HTML::Select($tmp_args_ar);
 
             //hidden page name
@@ -115,10 +117,12 @@
             ?>
             <script>
             $(document).ready(function(){
-                 $('#students_presence_overview_table').DataTable();
+                $('#students_presence_overview_table').DataTable({
+                    "lengthMenu": [ [-1, 25, 50, 100], ["All", 25, 50, 100] ]
+                });
 
                 //checkbox handling
-                $('.presence_checkbox').on('change', function(e){
+                $('#students_presence_overview_table').on('change', '.presence_checkbox', function(e){
                     e.preventDefault();
                     var student_id = $(this).data('student_id');
                         td = $(this).parents('td');
@@ -142,7 +146,7 @@
                     });
                 });
 
-                $('.climbing_level_input').on('change', function(e){
+                $('#students_presence_overview_table').on('change', '.climbing_level_input', function(e){
                     e.preventDefault();
                     var student_id = $(this).data('student_id');
                         field_name = $(this).data('field_name');

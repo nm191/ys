@@ -20,8 +20,9 @@
 
         static private function getPageNames(){
             $page_names_ar['students_overview'] = 'Overzicht';
-            $page_names_ar['presence']      = 'Presententie';
-            $page_names_ar['add_student']      = 'Voeg leerling toe';
+            $page_names_ar['presence']          = 'Presentie';
+            $page_names_ar['presence_history']  = 'Presentie historie';
+            $page_names_ar['add_student']       = 'Voeg leerling toe';
             
 
             return $page_names_ar;

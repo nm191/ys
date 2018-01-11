@@ -61,6 +61,10 @@
             if(!isset($filter_ar['is_active'])){
                 $filter_ar['is_active'] = 1;
             }
+
+            if(isset($filter_ar['group_id']) && $filter_ar['group_id'] == 420){
+                unset($filter_ar['group_id']);
+            }
             //build select ar
             $select_ar[] = 'stdnts.id';
             $select_ar[] = 'stdnts.first_name';
@@ -139,7 +143,7 @@
                     case 'id':
                     case 'is_active':
                     case 'group_id':
-                        if($filter_field == 'call_id'){ $filter_field = 'id'; }
+                    case 'contest_group':
                         if (is_array($filter_value)) {
                             $tmp_filter_select_ar = array();
                             foreach ($filter_value as $tmp_key => $tmp_value) {

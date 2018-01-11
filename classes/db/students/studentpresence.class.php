@@ -20,6 +20,19 @@
             return 'inserted';
         }
 
+        static public function getPresenceHistory(array $filter_ar = array()){
+            // if(!$filter_ar){ return false;}
+            $select_ar[] = 'prcnc.presence_date';
+            $select_ar[] = 'prcnc.student_id';
+
+            $sql_ar[] = 'SELECT '.implode(', ', $select_ar);
+            $sql_ar[] = 'FROM '.DB_Students_TbNames::PRESENCE.' prcnc';
+            $where_sql_ar = self::getWhereSQL($filter_ar);
+            if (!empty($where_sql_ar['sql'])) { $sql_ar[] = 'WHERE '.implode(' AND ', $where_sql_ar['sql']); }
+            // $sql_ar[] = 'GROUP BY prcnc.presence_date';
+            return DB::fetchMapped(implode(' ', $sql_ar), $where_sql_ar['params']); 
+        }
+
         static public function insert(array $field_values_ar){
             if(empty($field_values_ar)){
                 return false;
@@ -75,9 +88,6 @@
         }
 
         static public function getFullRecords(array $filter_ar = array()){
-            if(!isset($filter_ar['is_active'])){
-                $filter_ar['is_active'] = 1;
-            }
             //build select ar
             $select_ar[] = 'prsnc.id';
             $select_ar[] = 'prsnc.student_id';

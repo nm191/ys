@@ -58,5 +58,15 @@
             $stmt->execute();
             return  $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
          }
+
+         static public function fetchMapped($query, array $pdo_parameters_ar = array()){
+            self::$conn = self::getConnection();
+            $stmt = self::$conn->prepare($query);
+            foreach($pdo_parameters_ar as $key => &$value){
+                $stmt->bindParam($key, $value);
+            } 
+            $stmt->execute();
+            return  $stmt->fetchAll(PDO::FETCH_COLUMN|PDO::FETCH_GROUP);
+         }
      }   
 ?>
