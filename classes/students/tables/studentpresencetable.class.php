@@ -62,9 +62,9 @@
         static private function getTableHeader(){
             //build table header
             $th_ar = array();
-            $th_ar[] = HTML::Th('ID');
-            $th_ar[] = HTML::Th('Naam');
-            $th_ar[] = HTML::Th('Groep');
+            $th_ar[] = HTML::Th('ID', '', 'mobile_hide');
+            $th_ar[] = HTML::Th('Naam', '', '');
+            $th_ar[] = HTML::Th('Groep', '', 'mobile_hide');
             $th_ar[] = HTML::Th('Klimniveau');
             $th_ar[] = HTML::Th('Huur Materiaal?');
             $th_ar[] = HTML::Th('Aanwezig?');
@@ -101,9 +101,9 @@
                 $args_ar['data-field_name'] = 'climbing_level';
                 $climbing_level = HTML::Input($args_ar);
 
-                $tmp_td_ar[] = HTML::Td($record->id);
+                $tmp_td_ar[] = HTML::Td($record->id,'','mobile_hide');
                 $tmp_td_ar[] = HTML::Td($record->first_name.' '.$record->last_name);
-                $tmp_td_ar[] = HTML::Td($record->group_name);
+                $tmp_td_ar[] = HTML::Td($record->group_name, '', 'mobile_hide');
                 $tmp_td_ar[] = HTML::Td($climbing_level);
                 $tmp_td_ar[] = HTML::Td(($record->has_rental_equipment ? FontAwesome::Icon('check', 2) : FontAwesome::Icon('remove', 2)), '', ($record->has_rental_equipment ? 'table-success' : 'table-danger'));
                 $tmp_td_ar[] = HTML::Td($checkbox);

@@ -4,8 +4,8 @@
          static private function getConnection(){
             // make db connection
             $servername = "localhost";
-            $username = "silkmedi_nick";
-            $password = "Renoob2312";
+            $username = "root";
+            $password = "";
             
             try {
                 $conn = new PDO("mysql:host=$servername;dbname=silkmedi_ys", $username, $password);
