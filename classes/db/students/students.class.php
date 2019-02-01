@@ -52,13 +52,13 @@
         }
 
         static public function getFullRecord($record_id){
-            $record = self::getFullRecords(array('id' => $record_id));
+            $record = self::getFullRecords(['id' => $record_id, 'getfullrecord ' => true]);
             if($record){ return reset($record); }
             return false;
         }
 
         static public function getFullRecords(array $filter_ar = array()){
-            if(!isset($filter_ar['is_active'])){
+            if(!isset($filter_ar['is_active']) && !isset($filter_ar['getfullrecord'])){
                 $filter_ar['is_active'] = 1;
             }
 
@@ -88,6 +88,8 @@
             $select_ar[] = 'stdnts.group_id';
             $select_ar[] = 'stdnts.climbing_level';
             $select_ar[] = 'stdnts.has_rental_equipment';
+            $select_ar[] = 'stdnts.registration_date';
+            $select_ar[] = 'stdnts.remark';
             $select_ar[] = 'grps.description as group_name';
             $select_ar[] = 'prsnc.id as present';
 

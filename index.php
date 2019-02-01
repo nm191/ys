@@ -11,14 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Yellow-stone: Klimles</title>
-    <!-- Include Bootstrap, jQuery & Tether-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Include FontAwesome-->
     <script src="https://use.fontawesome.com/87e743cd60.js"></script>
     <!-- Include jQuery UI-->
@@ -37,7 +37,30 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 ml-auto mr-auto col-sm-12 text-center">
+        <div class="col s12 m6 offset-m3 center-align card">
+            <h1>Yellow-Stone</h1>
+            <div class="card-action">Login om verder te gaan</div>
+            <form class='login_form col s12' method='POST'>
+                <!-- Email row -->
+                <div class="row">
+                    <div class="input-field">
+                        <input type="email" class="form-control" id="inputEmail" name='email'>
+                        <label for="inputEmail">Email</label>
+                    </div>
+                </div>
+                <!-- Password row -->
+                <div class="row">
+                    <div class="input-field">
+                        <input type="password" class="form-control" id="inputPassword" name='password'>
+                        <label for="inputPassword">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn waves-effect waves-light">Log in</button>
+                </div>
+            </form>
+        </div>
+        <!-- <div class="col m6 s12 text-center">
             <h1>Yellow-stone</h1>
             <div class="card">
                 <div class="card-header">
@@ -70,7 +93,7 @@
                         <a href="#" class="forgot-password"><small>Wachtwoord vergeten?</small></a>
                     </div>
                 
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -87,9 +110,9 @@
                 console.log(result);
                 $('.login_form .alert ').remove();
                 if(!result){
-                    $('.login_form').prepend('<?= Bootstrap::Alert("Er ging helaas iets mis. Probeer het nog eens.", "danger")?>');
+                    $('.login_form').prepend('<?= Bootstrap::Alert("Er ging helaas iets mis. Probeer het nog eens.", "red")?>');
                 }else{
-                    $('.login_form').prepend('<?= Bootstrap::Alert("Je bent succesvol ingelogd. Je wordt binnen enkele seconden doorgestuurd.", "success")?>');
+                    $('.login_form').prepend('<?= Bootstrap::Alert("Je bent succesvol ingelogd. Je wordt binnen enkele seconden doorgestuurd.", "teal white-text")?>');
                     window.setTimeout(function(){
                         location.reload();
                     }, 2000);

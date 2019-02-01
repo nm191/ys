@@ -16,7 +16,7 @@
             $return_ar[] = $label;
             $return_ar[] = '<input '.implode(' ', $formatted_args_ar).'>';
 
-            return self::Div(implode('', $return_ar), '', 'form-group');
+            return implode('', $return_ar);
         }
 
         static public function TextArea($args){

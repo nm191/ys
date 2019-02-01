@@ -40,6 +40,9 @@
         case 'presence_history':
             $page_content_ar[] = Students_Tables_StudentPresenceHistoryTable::get($filter_ar);
             break;
+        case 'old_students':
+            $page_content_ar[] = Students_Tables_DeletedStudentsTable::get();
+            break;
         case 'ajax_set_student_presence_value':
             if(empty($_POST)){
                 die(0);
@@ -56,11 +59,16 @@
             if(empty($_POST)){
                 die(Bootstrap::Alert('Error: geen data meegegeven', 'danger'));
             }
-            $id = DB_Students_Students::store($_POST);
+            $field_values_ar = [];
+            foreach($_POST as $field_name => $field_value){
+                if(empty($_POST[$field_name])){ continue;}
+                $field_values_ar[$field_name] = trim($field_value);
+            }
+            $id = DB_Students_Students::store($field_values_ar);
             if($id){
-                die(Bootstrap::Alert('Gelukt! De gegevens zijn successvol toegevoegd!', 'success'));
+                die(Bootstrap::Alert('Gelukt! De gegevens zijn successvol toegevoegd!', 'teal white-text'));
             }else{
-                die(Bootstrap::Alert('Helaas! Er ging iets mis met het opslaan van de gegevens.', 'danger'));
+                die(Bootstrap::Alert('Helaas! Er ging iets mis met het opslaan van de gegevens.', 'red white-text'));
             }
             break;
         case 'ajax_delete_student':

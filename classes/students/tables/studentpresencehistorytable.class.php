@@ -14,7 +14,7 @@
             $return_ar[] = self::getTable();
             $return_ar[] = self::getJquery();
 
-            return implode('', $return_ar);
+            return HTML::Div(implode('', $return_ar), '', 'content-container');
         }
 
         static private function getTable(){
@@ -32,7 +32,7 @@
                     }else{
                         $cell_value = 'Afwezig';
                     }
-                    $tmp_td_ar[] = HTML::Td($cell_value, '', ($cell_value == 'Aanwezig' ? 'bg-success' : 'bg-danger'));
+                    $tmp_td_ar[] = HTML::Td($cell_value, '', ($cell_value == 'Aanwezig' ? 'green' : 'red'));
                 }
                 $tr_ar[] = HTML::Tr(implode('', $tmp_td_ar));
             }

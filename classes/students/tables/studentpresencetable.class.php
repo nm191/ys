@@ -17,7 +17,7 @@
             $return_ar[] = self::getFiltersContainer();
             $return_ar[] = self::getTable();
             $return_ar[] = self::getJquery();
-            return implode('', $return_ar);
+            return HTML::Div(implode('', $return_ar), '', 'content-container');
         }
 
         static private function getFiltersContainer(){
@@ -46,17 +46,17 @@
             $tmp_args_ar['type'] = 'submit';
             $tmp_args_ar['name'] = 'btn_submit'; 
             $tmp_args_ar['id'] = 'btn_submit'; 
-            $tmp_args_ar['class'] = 'btn btn-success'; 
+            $tmp_args_ar['class'] = 'btn btn-success amber'; 
             $tmp_args_ar['value'] = 'Toepassen'; 
             $form_elements_ar[$tmp_args_ar['name']] =  HTML::Input($tmp_args_ar);
 
             $form = HTML::Form(implode('', $form_elements_ar), 'students_presence_filter', '');
 
-            return HTML::Div($form, '', 'bg-primary text-white filter_container');
+            return HTML::Div($form, '', 'card-panel teal white-text filter_container');
         }
         
         static private function getTable(){
-            return HTML::Table(self::getTableHeader().self::getTableData(), 'students_presence_overview_table', 'table table-hover table-sm table-striped');
+            return HTML::Table(self::getTableHeader().self::getTableData(), 'students_presence_overview_table', 'table highlight');
         }
 
         static private function getTableHeader(){
@@ -65,7 +65,7 @@
             $th_ar[] = HTML::Th('ID', '', 'mobile_hide');
             $th_ar[] = HTML::Th('Naam', '', '');
             $th_ar[] = HTML::Th('Groep', '', 'mobile_hide');
-            $th_ar[] = HTML::Th('Klimniveau');
+            $th_ar[] = HTML::Th('Klimniveau', '', 'mobile_hide');
             $th_ar[] = HTML::Th('Huur Materiaal?');
             $th_ar[] = HTML::Th('Aanwezig?');
             $tr = HTML::Tr(implode('', $th_ar));
@@ -86,7 +86,7 @@
                     $args_ar['checked'] = true;
                 }
                 $args_ar['data-student_id'] = $record->id;
-                $checkbox = HTML::Input($args_ar);
+                $checkbox = HTML::Div('<label>'.HTML::Input($args_ar).'<span class="lever"></span></label>', '', 'switch');
 
                 //build climbing_level input
                 $arg_ar = [];
@@ -104,8 +104,8 @@
                 $tmp_td_ar[] = HTML::Td($record->id,'','mobile_hide');
                 $tmp_td_ar[] = HTML::Td($record->first_name.' '.$record->last_name);
                 $tmp_td_ar[] = HTML::Td($record->group_name, '', 'mobile_hide');
-                $tmp_td_ar[] = HTML::Td($climbing_level);
-                $tmp_td_ar[] = HTML::Td(($record->has_rental_equipment ? FontAwesome::Icon('check', 2) : FontAwesome::Icon('remove', 2)), '', ($record->has_rental_equipment ? 'table-success' : 'table-danger'));
+                $tmp_td_ar[] = HTML::Td($climbing_level, '', 'mobile_hide');
+                $tmp_td_ar[] = HTML::Td(($record->has_rental_equipment ? FontAwesome::Icon('check', 2) : FontAwesome::Icon('times', 2)), '', ($record->has_rental_equipment ? 'table-success' : 'table-danger'));
                 $tmp_td_ar[] = HTML::Td($checkbox);
                 $tr_ar[] = HTML::Tr(implode('', $tmp_td_ar), '', ($record->present ? 'table-success' : ''));
             }
@@ -117,9 +117,12 @@
             ?>
             <script>
             $(document).ready(function(){
-                $('#students_presence_overview_table').DataTable({
-                    "lengthMenu": [ [-1, 25, 50, 100], ["All", 25, 50, 100] ]
+                var students_table = $('#students_presence_overview_table').DataTable({
+                    "lengthMenu": [ [-1, 25, 50, 100], ["All", 25, 50, 100] ],
+                    "fixedHeader": true
                 });
+
+                students_table.fixedHeader.headerOffset( 56 );
 
                 //checkbox handling
                 $('#students_presence_overview_table').on('change', '.presence_checkbox', function(e){
@@ -136,11 +139,11 @@
                     }).done(function(result){
                         $('i.fa-spinner').remove();
                         if(result == 'inserted'){
-                            td.addClass('table-success');
-                            td.removeClass('table-danger');
+                            // td.addClass('table-success');
+                            // td.removeClass('table-danger');
                         }else{
-                            td.addClass('table-danger');
-                            td.removeClass('table-success');
+                            // td.addClass('table-danger');
+                            // td.removeClass('table-success');
                         }
                         // $('.result_container').html(result);
                     });

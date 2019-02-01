@@ -1,5 +1,5 @@
 <?php
-    class Students_Tables_StudentsTable{
+    class Students_Tables_DeletedStudentsTable{
 
         static public function get(){
             $return_ar[] = self::getConfirmationDialog();
@@ -33,7 +33,7 @@
 
         static private function getTableData(){
             //get all students
-            $records_ar = DB_Students_Students::getFullRecords();
+            $records_ar = DB_Students_Students::getFullRecords(['is_active' => 0]);
             $tr_ar = array();
             foreach($records_ar as $record){
                 $tmp_td_ar = array();
@@ -42,7 +42,7 @@
                 $options_ar[] = HTML::A(FontAwesome::Icon('pencil'), array('href' => '?page=add_student&student_id='.$record->id), '', 'btn btn-secondary btn-sm');
                 $args_ar['data-id'] = $record->id;
                 $args_ar['href'] = '#';
-                $options_ar[] = HTML::A(FontAwesome::Icon('trash'), $args_ar, '', 'btn red btn-sm btn_delete');
+                // $options_ar[] = HTML::A(FontAwesome::Icon('trash'), $args_ar, '', 'btn red btn-sm btn_delete');
                 $tmp_td_ar[] = HTML::Td($record->id);
                 $tmp_td_ar[] = HTML::Td($record->first_name);
                 $tmp_td_ar[] = HTML::Td($record->last_name);

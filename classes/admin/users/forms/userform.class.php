@@ -35,46 +35,46 @@
             //name
             $tmp_args_ar = array();
             $tmp_args_ar['type'] = 'text'; 
-            $tmp_args_ar['label'] = 'Naam:';  
+            $tmp_args_ar['label'] = 'Naam';  
             $tmp_args_ar['name'] = 'name'; 
             $tmp_args_ar['id'] = 'name'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$user->id ? self::$user->records_ar->name : ''); 
-            $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Div(HTML::Input($tmp_args_ar), '', 'input-field');
 
             //shorname
             $tmp_args_ar = array();
             $tmp_args_ar['type'] = 'text'; 
-            $tmp_args_ar['label'] = 'Initialen:';  
+            $tmp_args_ar['label'] = 'Initialen';  
             $tmp_args_ar['name'] = 'short_name'; 
             $tmp_args_ar['id'] = 'short_name'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$user->id ? self::$user->records_ar->short_name : ''); 
-            $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Div(HTML::Input($tmp_args_ar), '', 'input-field');
 
             //password
             $tmp_args_ar = array();
             $tmp_args_ar['type'] = 'password'; 
-            $tmp_args_ar['label'] = 'Wachtwoord:';  
+            $tmp_args_ar['label'] = 'Wachtwoord';  
             $tmp_args_ar['name'] = 'password'; 
             $tmp_args_ar['id'] = 'password'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
             // $tmp_args_ar['value'] = (self::$user->id ? self::$user->records_ar->first_name : ''); 
-            $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Div(HTML::Input($tmp_args_ar), '', 'input-field');
 
             //email
             $tmp_args_ar = array();
             $tmp_args_ar['type'] = 'email'; 
-            $tmp_args_ar['label'] = 'E-Mail:';  
+            $tmp_args_ar['label'] = 'E-Mail';  
             $tmp_args_ar['name'] = 'email'; 
             $tmp_args_ar['id'] = 'email'; 
             $tmp_args_ar['class'] = 'form-control'; 
             $tmp_args_ar['required'] = 'true'; 
             $tmp_args_ar['value'] = (self::$user->id ? self::$user->records_ar->email : ''); 
-            $form_elements_ar[$tmp_args_ar['name']] = HTML::Input($tmp_args_ar);
+            $form_elements_ar[$tmp_args_ar['name']] = HTML::Div(HTML::Input($tmp_args_ar), '', 'input-field');
 
             //user_id
             $tmp_args_ar = array();

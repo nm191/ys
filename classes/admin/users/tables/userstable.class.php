@@ -6,7 +6,7 @@
             $return_ar[] = self::getTable();
             $return_ar[] = self::getJquery();
 
-            return implode('', $return_ar);
+            return HTML::Div(implode('', $return_ar), '', 'content-container');
         }
 
         static private function getConfirmationDialog(){
@@ -40,7 +40,7 @@
                 $options_ar[] = HTML::A(FontAwesome::Icon('pencil'), array('href' => '?page=add_user&user_id='.$record->id), '', 'btn btn-secondary btn-sm');
                 $args_ar['data-id'] = $record->id;
                 $args_ar['href'] = '#';
-                $options_ar[] = HTML::A(FontAwesome::Icon('trash'), $args_ar, '', 'btn btn-danger btn-sm btn_delete');
+                $options_ar[] = HTML::A(FontAwesome::Icon('trash'), $args_ar, '', 'btn red   btn-sm btn_delete');
                 $tmp_td_ar[] = HTML::Td($record->id);
                 $tmp_td_ar[] = HTML::Td($record->name);
                 $tmp_td_ar[] = HTML::Td($record->short_name);
