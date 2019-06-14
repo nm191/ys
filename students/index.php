@@ -61,6 +61,12 @@
             }
             $field_values_ar = [];
             foreach($_POST as $field_name => $field_value){
+                if(in_array($field_name, ['has_rental_equipment', 'contest_group'])){
+                    if(empty($_POST[$field_name])){ 
+                        $field_values_ar[$field_name] = trim($field_value);
+                        continue;
+                    }
+                }
                 if(empty($_POST[$field_name])){ continue;}
                 $field_values_ar[$field_name] = trim($field_value);
             }

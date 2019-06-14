@@ -114,18 +114,23 @@ td.table-danger{
     justify-content: space-between;
     align-items: center;
 }
-#new_student_form{
+
+form{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-#new_student_form #btn_submit{
+.login_form{
+    display: block;
+}
+
+form #btn_submit{
     width: 100%;
     margin: 15px;    
 }
 
-#new_student_form fieldset{
+form fieldset{
     width: 30%;
 }
 
@@ -151,7 +156,7 @@ table.dataTable{
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
 
-    #new_student_form fieldset{
+    form fieldset{
         width: 100%;
     }
 }

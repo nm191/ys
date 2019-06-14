@@ -54,6 +54,7 @@
                 <ul class="right hide-on-med-and-down">
                     <li class="<?= (in_array('home.php', $url_ar) ? 'active' : '')?>"><a href="http://<?= PUBLIC_ROOT ?>">Home <span class="sr-only">(current)</span></a></li>
                     <li class="nav-link <?= (in_array('students', $url_ar) ? 'active' : '')?>"><a href="http://<?= PUBLIC_ROOT ?>students">Klimles Kids</a></li>
+                    <li class="nav-link <?= (in_array('trainings', $url_ar) ? 'active' : '')?>"><a href="http://<?= PUBLIC_ROOT ?>trainings">Trainingen</a></li>
                     <?php if($_SESSION['user']->id == 1){?>
                         <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Admin</i></a></li>
                     <?php } ?>
@@ -66,6 +67,7 @@
     <ul class="sidenav" id="mobile-demo">
         <li class="<?= (in_array('home.php', $url_ar) ? 'active' : '')?>"><a href="http://<?= PUBLIC_ROOT ?>">Home <span class="sr-only">(current)</span></a></li>
         <li class="nav-link <?= (in_array('students', $url_ar) ? 'active' : '')?>"><a href="http://<?= PUBLIC_ROOT ?>students">Klimles Kids</a></li>
+        <li class="nav-link <?= (in_array('trainings', $url_ar) ? 'active' : '')?>"><a href="http://<?= PUBLIC_ROOT ?>trainings">Trainingen</a></li>
         <?php if($_SESSION['user']->id == 1){?>
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Admin</i></a></li>
         <?php } ?>
